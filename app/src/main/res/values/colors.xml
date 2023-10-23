@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="color_add">#f10</color>
+    <color name="color_add_no_backstack">#fcf</color>
+    <color name="color_detach">#843</color>
+    <color name="color_attach">#f0f</color>
+    <color name="color_hide">#0ff</color>
+    <color name="color_hide_disable">#eee</color>
+    <color name="color_show">#fc0</color>
+    <color name="color_show_disable">#eee</color>
+    <color name="color_replace">#f79</color>
+    <color name="color_set_primary">#2f3</color>
+    <color name="color_undecided">#eee</color>
+    <color name="color_active_frag">#8a8</color>
+</resources>
