@@ -88,9 +88,22 @@ class MainActivity : AppCompatActivity() {
 //                    supportFragmentManager.popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 //                    supportFragmentManager.fragments.first().childFragmentManager.popBackStack()
 //                    supportFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    supportFragmentManager.popBackStack()
-                    supportFragmentManager.executePendingTransactions()
-                    _vm.refreshStackData(supportFragmentManager, getCurrentFragmentTag())
+                    try {
+                        supportFragmentManager.popBackStack()
+                        supportFragmentManager.executePendingTransactions()
+                    } catch (e: Exception) {
+                        supportFragmentManager.beginTransaction().apply {
+                            for (frag in supportFragmentManager.fragments) {
+                                remove(frag)
+                            }
+                            commitNow()
+                        }
+                        supportFragmentManager.executePendingTransactions()
+
+                        showExplanationDialog(Op.UNDECIDED, e.message)
+                    } finally {
+                        _vm.refreshStackData(supportFragmentManager, getCurrentFragmentTag())
+                    }
 
                     return
                 }
@@ -295,7 +308,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showExplanationDialog(op: Op) {
+    private fun showExplanationDialog(op: Op, custMsg: String? = null) {
         val msg = when(op) {
 
             Op.SHOW -> {
@@ -329,12 +342,14 @@ class MainActivity : AppCompatActivity() {
                 "You can only attach when the fragment was previously detached.\n\nPlease detach a fragment first."
             }
 
-            else -> { null }
+            else -> {
+                custMsg
+            }
         }
 
         msg?.let {
             AlertDialog.Builder(this).apply {
-                setTitle("Hint")
+                setTitle(if(op == Op.UNDECIDED) "Exception" else "Hint")
                 setMessage(it)
             }.show()
         }
