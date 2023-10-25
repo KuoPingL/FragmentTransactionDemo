@@ -13,6 +13,14 @@ Through transaction apis, you should find the followings:
 - `attach` is attaching a fragment that was previously detached. However, unlike `show`, `attach` will display the fragment on the screen. This function will make the fragment go through onViewCreated, onStart, onResume.
 - `setPrimaryNavigationFragment` doesn't do mush on this sample. Because it is used to set a currently active fragment in this FragmentManager as the primary navigation fragment. The primary fragment will be called first to process delegated navigation actions such as `FragmentManager.popBackStack()`if no ID or transaction name is provided to pop to.
 
+# Versions
+## v1.0
+init commit 
+
+## v1.0.1
+fix : https://github.com/KuoPingL/FragmentTransactionDemo/issues/1
+
+
 If there is any bug or suggestions, feel free to send an issue or push your suggested fix.
 
 Thanks and Enjoy.
