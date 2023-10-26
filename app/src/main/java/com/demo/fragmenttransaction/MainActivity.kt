@@ -120,8 +120,8 @@ class MainActivity : AppCompatActivity() {
             it?.let { op ->
 
                 val transaction = supportFragmentManager.beginTransaction()
-                var data: FragmentAdapter.Data? = null
-                var color = R.color.color_undecided
+                val data: FragmentAdapter.Data?
+                val color: Int
                 val name = op.getString() + " $counter"
 
                 _adapter.clearSelectedData()
